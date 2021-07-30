@@ -162,7 +162,9 @@ open class KSPlayerLayer: UIView {
     }
 
     open func play() {
+        #if os(iOS)
         UIApplication.shared.isIdleTimerDisabled = true
+        #endif
         isAutoPlay = true
         if let player = player {
             if player.isPreparedToPlay {
@@ -184,7 +186,9 @@ open class KSPlayerLayer: UIView {
         player?.pause()
         timer.fireDate = Date.distantFuture
         state = .paused
+        #if os(iOS)
         UIApplication.shared.isIdleTimerDisabled = false
+        #endif
     }
 
     open func resetPlayer() {
@@ -195,7 +199,9 @@ open class KSPlayerLayer: UIView {
         shouldSeekTo = 0
         player?.playbackRate = 1
         player?.playbackVolume = 1
+        #if os(iOS)
         UIApplication.shared.isIdleTimerDisabled = false
+        #endif
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
     }
 
